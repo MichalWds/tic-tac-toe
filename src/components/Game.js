@@ -10,10 +10,14 @@ export default function Game() {
             <button> Start</button>
         </li>
     )
+
+    const Squares =  Array(9).fill(null);
+
+
     return (
         <div>
             <div className="board-game">
-                <Board> </Board>
+                <Board squares={Squares}> </Board>
             </div>
 
                 <div className="info-game">
