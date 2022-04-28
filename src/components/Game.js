@@ -15,13 +15,13 @@ export default function Game() {
 
 
     return (
-        <div>
+        <div className="game">
             <div className="board-game">
                 <Board squares={Squares}> </Board>
             </div>
 
                 <div className="info-game">
-                    <div>{moveInformation}</div>
+                    <div className="status"> {moveInformation}</div>
                     <ul>{listOfMoves}</ul>
                 </div>
         </div>
