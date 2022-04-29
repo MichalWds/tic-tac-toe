@@ -24,6 +24,23 @@ export default function Game() {
     });
     const {xIsNext, history} = state;
 
+    const handleClick = (squareIndex) => {
+        //last item in history
+        const current = history [history.length -1];
+
+        //copy of squares in variable Squares  // slice create new string
+        const Squares = current.squares.slice();
+
+        const winner = calculateWinner(Squares);
+    }
+
+    /*
+    todo create calculate winner method to calculate the winner. Prepare array of winning scenarios
+     */
+    const calculateWinner = (squares) => {
+        return null;
+    }
+
     const moveInformation = "Next move will be player O"
     const listOfMoves = (
         <li>
