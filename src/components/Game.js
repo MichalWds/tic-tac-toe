@@ -39,24 +39,24 @@ export default function Game() {
         const current = history [history.length - 1];
 
         //copy of squares in variable Squares  // slice create new string
-        const Squares = current.squares.slice();
+        const squares = current.squares.slice();
 
-        const winner = calculateWinner(Squares);
+        const winner = calculateWinner(squares);
         //if winner or square is taken then finish
-        if (winner || Squares[squareIndex]) {
+        if (winner || squares[squareIndex]) {
             return;
         }
         // fill square with given index with X or O
-        Squares[squareIndex] = xIsNext ? 'X' : 'O';
-        dispatch({type: 'MOVE', payload: {Squares}});
+        squares[squareIndex] = xIsNext ? 'X' : 'O';
+        dispatch({type: 'MOVE', payload: {squares}});
         //curly because it point to squares: action.payload.squares
     }
 
     const current = history [history.length - 1];
-    const winner = calculateWinner(current.Squares);
+    const winner = calculateWinner(current.squares);
 
     const gameStatus = winner
-        ? winner == 'D'
+        ? winner == 'Draw'
             ? 'Draw'
             : "Winner is" + winner
         : "Next move belongs to player " + (xIsNext ? 'X' : 'O')
@@ -70,13 +70,15 @@ export default function Game() {
         </li>
     });
 
-    const Squares = Array(9).fill(null);
+    //   const squares = Array(9).fill(null);
 
 
     return (
         <div className="game">
             <div className="board-game">
-                <Board squares={Squares}> </Board>
+                {/*current squares takes it from history and history take it from state*/}
+                <Board onClick={(i) => handleClick(i)} squares={current.squares}> </Board>
+
             </div>
 
             <div className="info-game">
@@ -90,5 +92,26 @@ export default function Game() {
   todo create calculate winner method to calculate the winner. Prepare array of winning scenarios
    */
 const calculateWinner = (squares) => {
+    const winLines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+    let isDraw = true;
+    for (let i = 0; i < winLines.length; i++) {
+        const [a, b, c] = winLines[i];
+        if (squares[a] && squares[a] == squares[b] && squares[b] == squares[c]) {
+            return squares[a];
+        }
+        if (!squares[a] || !squares[b] || !squares[c]) {
+            isDraw = false;
+        }
+    }
+    if(isDraw) return 'Draw';
     return null;
 }
