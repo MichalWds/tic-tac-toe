@@ -47,7 +47,7 @@ export default function Game() {
             return;
         }
         // fill square with given index with X or O
-        squares[squareIndex] = xIsNext ? 'X' : 'O';
+        squares[squareIndex] = xIsNext ? '❌' : '🔵';
         dispatch({type: 'MOVE', payload: {squares}});
         //curly because it point to squares: action.payload.squares
     }
@@ -59,7 +59,7 @@ export default function Game() {
         ? winner == 'Draw'
             ? 'Draw'
             : "Winner is" + winner
-        : "Next move belongs to player " + (xIsNext ? 'X' : 'O')
+        : "Next move belongs to player " + (xIsNext ? '❌' : '🔵')
     //step = element inside history , move = index of this array
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the Game";  //go to step number or start the game
