@@ -1,8 +1,9 @@
 import React, {useReducer} from 'react';
 import Board from "./Board";
+import {Redirect} from "react-router-dom";
 
+export default function Game({authorized}) {
 
-export default function Game() {
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -72,7 +73,9 @@ export default function Game() {
 
     //   const squares = Array(9).fill(null);
 
-
+    if(!authorized){
+        return <Redirect to="/"></Redirect>
+    }
     return (
         <div className="game">
             <div className="board-game">
