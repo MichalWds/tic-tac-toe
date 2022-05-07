@@ -13,15 +13,11 @@ function validate(nameOne, nameTwo) {
     }
 
     if (errors.length == 0) {
-        errors.push('None');
         alert('POPRAWNE DANE');
         return errors;
     }
-
     return errors;
 }
-
-
 
 export default class Forms extends React.Component {
 
@@ -41,24 +37,17 @@ export default class Forms extends React.Component {
         e?.preventDefault();
         const { nameOne, nameTwo } = this.state;
 
+        let isError = false;
+
         const errors = validate(nameOne, nameTwo);
         if (errors.length > 0) {
-            this.setState({ errors });
-            return;
+            this.setState({ errors: errors });
+            isError = true;
+        }
+        if (!isError) {
+            this.props.history.push('/game');
         }
     };
-
-    refreshPage = ()=> {
-        window.location.reload();
-    };
-    onClickFunctions = () => {
-
-        this.props.history.push('/game');
-    //   this.refreshPage();
-
-        this.handleSubmit();
-    };
-
 
     render = () => {
         const { errors } = this.state;
@@ -84,7 +73,6 @@ export default class Forms extends React.Component {
                     <button
                         type="submit"
                         className="btn btn-dark"
-                        onClick={this.onClickFunctions}
                     >
                         Submit
                     </button>
