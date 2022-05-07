@@ -1,8 +1,8 @@
-import React from 'react';
-import Player from "./Player";
+import React, {useState} from 'react';
 
 function validate(nameOne, nameTwo) {
     const errors = [];
+
 
     if (nameOne.length < 5) {
         errors.push('Name of first player should be at least 5 characters long');
@@ -46,6 +46,7 @@ export default class Forms extends React.Component {
         }
         if (!isError) {
             this.props.history.push('/game');
+            window. location. reload()  //remove in future
         }
     };
 

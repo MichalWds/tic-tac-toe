@@ -1,7 +1,7 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useState} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
-import Forms from "./Forms";
+
 
 export default function Game({authorized}) {
 
@@ -71,8 +71,6 @@ export default function Game({authorized}) {
             </button>
         </li>
     });
-
-    //   const squares = Array(9).fill(null);
 
     if(!authorized){
         return <Redirect to="/"/>
