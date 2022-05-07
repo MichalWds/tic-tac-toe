@@ -1,6 +1,7 @@
 import React, {useReducer} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
+import Forms from "./Forms";
 
 export default function Game({authorized}) {
 
@@ -74,7 +75,7 @@ export default function Game({authorized}) {
     //   const squares = Array(9).fill(null);
 
     if(!authorized){
-        return <Redirect to="/"></Redirect>
+        return <Redirect to="/"/>
     }
     return (
         <div className="game">
@@ -91,9 +92,7 @@ export default function Game({authorized}) {
         </div>
     )
 }
-/*
-  todo create calculate winner method to calculate the winner. Prepare array of winning scenarios
-   */
+
 const calculateWinner = (squares) => {
     const winLines = [
         [0, 1, 2],

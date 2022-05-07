@@ -9,8 +9,8 @@ function App() {
 
             <Switch>
 
-                <Route exact path="/" component={Forms}/>
                 <Route exact path="/game" component={() => <Game authorized={true}/>}/>
+                <Route exact path="/" component={Forms}/>
 
             </Switch>
 

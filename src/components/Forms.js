@@ -1,10 +1,15 @@
 import React from 'react';
+import Player from "./Player";
 
-function validate(name) {
+function validate(nameOne, nameTwo) {
     const errors = [];
 
-    if (name.length < 5) {
-        errors.push('Name should be at least 5 characters long');
+    if (nameOne.length < 5) {
+        errors.push('Name of first player should be at least 5 characters long');
+    }
+
+    if (nameTwo.length < 5) {
+        errors.push('Name of second player should be at least 5 characters long');
     }
 
     if (errors.length == 0) {
@@ -23,7 +28,8 @@ export default class Forms extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: '',
+            nameOne: '',
+            nameTwo: '',
             errors: [],
         };
 
@@ -32,22 +38,27 @@ export default class Forms extends React.Component {
 
 
     handleSubmit = (e) => {
-        e.preventDefault();
-        const { name } = this.state;
+        e?.preventDefault();
+        const { nameOne, nameTwo } = this.state;
 
-        const errors = validate(name);
+        const errors = validate(nameOne, nameTwo);
         if (errors.length > 0) {
             this.setState({ errors });
             return;
         }
     };
 
+    refreshPage = ()=> {
+        window.location.reload();
+    };
     onClickFunctions = () => {
 
         this.props.history.push('/game');
-        this.handleSubmit();
+    //   this.refreshPage();
 
-    }
+        this.handleSubmit();
+    };
+
 
     render = () => {
         const { errors } = this.state;
@@ -58,10 +69,16 @@ export default class Forms extends React.Component {
                 ))}
 
                 <input
-                    value={this.state.name}
-                    onChange={(evt) => this.setState({ name: evt.target.value })}
+                    value={this.state.nameOne}
+                    onChange={(evt) => this.setState({ nameOne: evt.target.value })}
                     type="text"
-                    placeholder="name"
+                    placeholder="playerOne"
+                />
+                <input
+                    value={this.state.nameTwo}
+                    onChange={(evt) => this.setState({ nameTwo: evt.target.value })}
+                    type="text"
+                    placeholder="playerTwo"
                 />
                 <div className="d-grid">
                     <button
