@@ -32,7 +32,6 @@ export default class Forms extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     handleSubmit = (e) => {
         e?.preventDefault();
         const { nameOne, nameTwo } = this.state;
@@ -45,6 +44,10 @@ export default class Forms extends React.Component {
             isError = true;
         }
         if (!isError) {
+
+            localStorage.setItem("playerOne", nameOne)
+            localStorage.setItem("playerTwo", nameTwo)
+
             this.props.history.push('/game');
             window. location. reload()  //remove in future
         }

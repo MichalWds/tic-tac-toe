@@ -1,9 +1,8 @@
 import React, {useReducer, useState} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
-
-
-export default function Game({authorized}) {
+import Forms from "./Forms";
+export default function Game({authorized}, props) {
 
 
     const reducer = (state, action) => {
@@ -61,7 +60,7 @@ export default function Game({authorized}) {
         ? winner == 'Draw'
             ? 'Draw'
             : "Winner is" + winner
-        : "Next move belongs to player " + (xIsNext ? '❌' : '🔵')
+        : "Next move belongs to player " + (xIsNext ? localStorage.getItem("playerOne") + "❌" : localStorage.getItem("playerTwo")+'🔵')
     //step = element inside history , move = index of this array
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the Game";  //go to step number or start the game
