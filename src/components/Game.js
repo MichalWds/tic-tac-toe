@@ -2,7 +2,8 @@ import React, {useReducer, useState} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
 import Forms from "./Forms";
-export default function Game({authorized}, props) {
+import Forms2 from "./Forms2";
+export default function Game({authorized}) {
 
 
     const reducer = (state, action) => {

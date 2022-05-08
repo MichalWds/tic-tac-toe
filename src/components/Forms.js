@@ -65,13 +65,13 @@ export default class Forms extends React.Component {
                     value={this.state.nameOne}
                     onChange={(evt) => this.setState({ nameOne: evt.target.value })}
                     type="text"
-                    placeholder="playerOne"
+                    placeholder="player X"
                 />
                 <input
                     value={this.state.nameTwo}
                     onChange={(evt) => this.setState({ nameTwo: evt.target.value })}
                     type="text"
-                    placeholder="playerTwo"
+                    placeholder="player O"
                 />
                 <div className="d-grid">
                     <button
