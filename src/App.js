@@ -6,15 +6,10 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 function App() {
     return (
         <Router>
-
             <Switch>
-
-                <Route exact path="/" component={Forms}/>
                 <Route exact path="/game" component={() => <Game authorized={true}/>}/>
-
+                <Route exact path="/" component={Forms}/>
             </Switch>
-
-
         </Router>
     );
 }

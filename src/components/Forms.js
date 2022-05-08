@@ -1,53 +1,57 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-function validate(name) {
+function validate(nameOne, nameTwo) {
     const errors = [];
 
-    if (name.length < 5) {
-        errors.push('Name should be at least 5 characters long');
+
+    if (nameOne.length < 5) {
+        errors.push('Name of first player should be at least 5 characters long');
+    }
+
+    if (nameTwo.length < 5) {
+        errors.push('Name of second player should be at least 5 characters long');
     }
 
     if (errors.length == 0) {
-        errors.push('None');
         alert('POPRAWNE DANE');
         return errors;
     }
-
     return errors;
 }
-
-
 
 export default class Forms extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            name: '',
+            nameOne: '',
+            nameTwo: '',
             errors: [],
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     handleSubmit = (e) => {
-        e.preventDefault();
-        const { name } = this.state;
+        e?.preventDefault();
+        const { nameOne, nameTwo } = this.state;
 
-        const errors = validate(name);
+        let isError = false;
+
+        const errors = validate(nameOne, nameTwo);
         if (errors.length > 0) {
-            this.setState({ errors });
-            return;
+            this.setState({ errors: errors });
+            isError = true;
+        }
+        if (!isError) {
+
+            localStorage.setItem("playerOne", nameOne)
+            localStorage.setItem("playerTwo", nameTwo)
+
+            this.props.history.push('/game');
+            window. location. reload()  //remove in future
         }
     };
-
-    onClickFunctions = () => {
-
-        this.props.history.push('/game');
-        this.handleSubmit();
-
-    }
 
     render = () => {
         const { errors } = this.state;
@@ -58,16 +62,21 @@ export default class Forms extends React.Component {
                 ))}
 
                 <input
-                    value={this.state.name}
-                    onChange={(evt) => this.setState({ name: evt.target.value })}
+                    value={this.state.nameOne}
+                    onChange={(evt) => this.setState({ nameOne: evt.target.value })}
                     type="text"
-                    placeholder="name"
+                    placeholder="playerOne"
+                />
+                <input
+                    value={this.state.nameTwo}
+                    onChange={(evt) => this.setState({ nameTwo: evt.target.value })}
+                    type="text"
+                    placeholder="playerTwo"
                 />
                 <div className="d-grid">
                     <button
                         type="submit"
                         className="btn btn-dark"
-                        onClick={this.onClickFunctions}
                     >
                         Submit
                     </button>

@@ -1,8 +1,8 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useState} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
-
-export default function Game({authorized}) {
+import Forms from "./Forms";
+export default function Game({authorized}, props) {
 
 
     const reducer = (state, action) => {
@@ -60,7 +60,7 @@ export default function Game({authorized}) {
         ? winner == 'Draw'
             ? 'Draw'
             : "Winner is" + winner
-        : "Next move belongs to player " + (xIsNext ? '❌' : '🔵')
+        : "Next move belongs to player " + (xIsNext ? localStorage.getItem("playerOne") + "❌" : localStorage.getItem("playerTwo")+'🔵')
     //step = element inside history , move = index of this array
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the Game";  //go to step number or start the game
@@ -71,10 +71,8 @@ export default function Game({authorized}) {
         </li>
     });
 
-    //   const squares = Array(9).fill(null);
-
     if(!authorized){
-        return <Redirect to="/"></Redirect>
+        return <Redirect to="/"/>
     }
     return (
         <div className="game">
@@ -91,9 +89,7 @@ export default function Game({authorized}) {
         </div>
     )
 }
-/*
-  todo create calculate winner method to calculate the winner. Prepare array of winning scenarios
-   */
+
 const calculateWinner = (squares) => {
     const winLines = [
         [0, 1, 2],
