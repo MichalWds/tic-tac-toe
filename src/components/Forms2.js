@@ -13,6 +13,10 @@ function validate(nameOne, nameTwo) {
         errors.push('Name of second player should be at least 5 characters long');
     }
 
+    if (nameTwo == nameOne) {
+        errors.push('Names are the same. Change one to continue');
+    }
+
     if (errors.length == 0) {
         alert('POPRAWNE DANE');
         return errors;

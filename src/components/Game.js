@@ -1,10 +1,8 @@
 import React, {useReducer, useState} from 'react';
 import Board from "./Board";
 import {Redirect} from "react-router-dom";
-import Forms from "./Forms";
-import Forms2 from "./Forms2";
-export default function Game({authorized}) {
 
+export default function Game({authorized}) {
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -30,6 +28,8 @@ export default function Game({authorized}) {
         history: [{squares: Array(9).fill(null)}],
     });
     const {xIsNext, history} = state;
+    localStorage.setItem("turn", JSON.stringify(xIsNext))
+    localStorage.setItem("history", JSON.stringify(history))
 
     //go to specific move in history
     const goTo = (step) => {
@@ -56,6 +56,9 @@ export default function Game({authorized}) {
 
     const current = history [history.length - 1];
     const winner = calculateWinner(current.squares);
+
+    const turn = localStorage.getItem("turn");
+    const hist = JSON.parse(localStorage.getItem('history'))
 
     const gameStatus = winner
         ? winner == 'Draw'
