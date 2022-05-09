@@ -79,9 +79,9 @@ export default function Game({authorized}) {
         </li>
     });
 
-    // if (!authorized) {
-    //     return <Redirect to="/"/>
-    // }
+    if (!authorized) {
+        return <Redirect to="/"/>
+    }
 
     const routeChange = () =>{
         let path = `/`;

@@ -6,7 +6,7 @@ body{
     display: flex;
     align-items:center;
     justify-content: center;
-    background: #b44a41;
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("resources/backgr.png");
 }
 
 /*BUTTON*/
@@ -36,7 +36,6 @@ body{
     background-color: #1aab52;
 }
 /*BUTTON ENDS*/
-
 
 /*BUTTON LOGIN*/
 .button-login {
@@ -84,11 +83,10 @@ body{
 }
 /*GAME ENDS*/
 
-
 /*BUTTON LOGIN FORM*/
 .button-form {
     border: none;
-    padding: 12px 30px;
+    padding: 12px 20px;
     border-radius: 20px;
     box-shadow: 0 0 10px #666;
     font-size: 24px;
@@ -96,21 +94,20 @@ body{
 }
 
 .button-form:hover {
-    background: #fef9ff80;
+    background: rgba(23, 191, 89, 0.82);
     cursor: pointer;
 }
 /*BUTTON LOGIN FORM ENDS*/
 
-
 /*GAME STATUS*/
 .game-status {
-    color: #ac5aff;
-    font-size: 30px;
+    color: #7320c7;
+    font-size: 35px;
     font-family: cursive;
     text-shadow: 0 0 5px #7131ff;
 }
 
-/*BUTTON LOGIN FORM*/
+/*BUTTON LIST*/
 .button-list {
     border: none;
     padding: 6px 20px;
@@ -124,4 +121,32 @@ body{
     background: #fef9ff80;
     cursor: pointer;
 }
-/*BUTTON LOGIN FORM ENDS*/
+/*BUTTON LIST ENDS*/
+
+/*LOGIN FORM*/
+.login-form {
+    color: #7320c7;
+    font-size: 50px;
+    font-family: cursive;
+    text-shadow: 0 0 5px #7131ff;
+}
+
+input {
+    width: 100%;
+    font-size: 30px;
+    font-family: Optima, sans-serif;
+}
+
+.input-form-o {
+    width: 100%;
+    font-size: 30px;
+    background-color: #b1dfe3;
+    font-family: Optima, sans-serif;
+}
+
+.input-form-x {
+    width: 100%;
+    font-size: 30px;
+    background-color: #e89aa4;
+    font-family: Optima, sans-serif;
+}

@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 function validate(nameOne, nameTwo) {
     const errors = [];
-
 
     if (nameOne.length < 5) {
         errors.push('Name of first player should be at least 5 characters long');
@@ -39,7 +38,7 @@ export const Forms2 = () => {
 
     };
 
-   const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e?.preventDefault();
 
         let isError = false;
@@ -56,7 +55,7 @@ export const Forms2 = () => {
             localStorage.setItem("playerTwo", nameTwo)
 
             history.push('/game');
-            window. location. reload()
+            window.location.reload()
         }
     };
 
@@ -66,32 +65,32 @@ export const Forms2 = () => {
                 <p key={error}>Error: {error}</p>
             ))}
 
-            <label>playerOne</label>
+            <label className="login-form">First Player</label>
+            <br/>
             <input
                 type="text"
                 value={nameOne}
                 onChange={(event) => setNameOne(event.target.value)}
-                placeholder="player ❌"
+                placeholder="Player ❌"
+                className="input-form-x"
             />
             <br/>
-            <label>playerTwo</label>
-            <input
-                type="text"
+            <br/>
+
+            <label className="login-form">Second Player</label>
+            <br/>
+            <input type="text"
                 value={nameTwo}
                 onChange={(event) => setNameTwo(event.target.value)}
-                placeholder="player 🔵"
+                placeholder="Player 🔵"
+                className="input-form-o"
             />
             <br/>
             <br/>
-
-            <button
-                type="submit"
-                className="button-form"
-            >
-                Submit
-            </button>
-
-            <input type="button" onClick={resetData} value="Reset form" className="button-form"/>
+            <input type="button" type="submit" value="Submit" className="button-form"/>
+            <br/>
+            <br/>
+            <input type="button" onClick={resetData} value="Reset" className="button-form"/>
         </form>
     );
 };
