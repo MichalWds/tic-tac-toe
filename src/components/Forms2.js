@@ -55,9 +55,8 @@ export const Forms2 = () => {
             localStorage.setItem("playerOne", nameOne)
             localStorage.setItem("playerTwo", nameTwo)
 
-
             history.push('/game');
-            window. location. reload()  //remove in future
+            window. location. reload()
         }
     };
 
@@ -72,7 +71,7 @@ export const Forms2 = () => {
                 type="text"
                 value={nameOne}
                 onChange={(event) => setNameOne(event.target.value)}
-                placeholder="player X"
+                placeholder="player 🔵"
             />
             <br/>
             <label>playerTwo</label>
@@ -80,7 +79,7 @@ export const Forms2 = () => {
                 type="text"
                 value={nameTwo}
                 onChange={(event) => setNameTwo(event.target.value)}
-                placeholder="player O"
+                placeholder="player ❌"
             />
             <br/>
             <button
