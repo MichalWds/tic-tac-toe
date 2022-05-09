@@ -71,7 +71,7 @@ export const Forms2 = () => {
                 type="text"
                 value={nameOne}
                 onChange={(event) => setNameOne(event.target.value)}
-                placeholder="player 🔵"
+                placeholder="player ❌"
             />
             <br/>
             <label>playerTwo</label>
@@ -79,17 +79,19 @@ export const Forms2 = () => {
                 type="text"
                 value={nameTwo}
                 onChange={(event) => setNameTwo(event.target.value)}
-                placeholder="player ❌"
+                placeholder="player 🔵"
             />
             <br/>
+            <br/>
+
             <button
                 type="submit"
-                className="btn btn-dark"
+                className="button-form"
             >
                 Submit
             </button>
 
-            <input type="button" onClick={resetData} value="Reset form"/>
+            <input type="button" onClick={resetData} value="Reset form" className="button-form"/>
         </form>
     );
 };

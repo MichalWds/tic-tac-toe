@@ -23,21 +23,16 @@ export default function Game({authorized}) {
                 return state;
         }
     };
-    const [state, dispatch] = useReducer(reducer, {
+   const [state, dispatch] = useReducer(reducer, {
         xIsNext: JSON.parse(localStorage.getItem('turn')),
-        history: JSON.parse(localStorage.getItem('history')),
+        history: JSON.parse(localStorage.getItem('history'))
     });
-    // history: [{squares: Array(9).fill(null)}],
-    //JSON.parse(localStorage.getItem('history'))
+    // history: [{squares: Array(9).fill(null)}]
 
     const {xIsNext, history} = state;
     localStorage.setItem("turn", JSON.stringify(xIsNext))
     localStorage.setItem("history", JSON.stringify(history))
 
-    // if(state.history === null){
-    //      state.history= [{squares: Array(9).fill(null)}]
-    // }
-    //go to specific move in history
     const goTo = (step) => {
         dispatch({type: 'GOTO', payload: {step}});
     }
@@ -55,7 +50,7 @@ export default function Game({authorized}) {
             return;
         }
         // fill square with given index with X or O
-        squares[squareIndex] = xIsNext ? '🔵' : '❌';
+        squares[squareIndex] = xIsNext ? '❌' : '🔵';
         dispatch({type: 'MOVE', payload: {squares}});
         //curly because it point to squares: action.payload.squares
     }
@@ -71,43 +66,48 @@ export default function Game({authorized}) {
 
     const gameStatus = winner
         ? winner === 'Draw'
-            ? 'Draw'
-            : "Winner is" + winner
-        : "Next move belongs to player " + (turn ? localStorage.getItem("playerOne") + "🔵" : localStorage.getItem("playerTwo") + '❌')
+            ? "It's a DRAW!"
+            : "Winner is  " + winner
+        : "Next move belongs to player " + (turn ? localStorage.getItem("playerOne") + ":  ❌" : localStorage.getItem("playerTwo") + ":  🔵")
     //step = element inside history , move = index of this array
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the same Game";  //go to step number or start the game
-        return <li key={move}>
-            <button onClick={() => goTo(move)}>
+        return <li key={move}  >
+            <button onClick={() => goTo(move)} className="button-list">
                 {description}
             </button>
         </li>
     });
 
-    if (!authorized) {
-        return <Redirect to="/"/>
-    }
+    // if (!authorized) {
+    //     return <Redirect to="/"/>
+    // }
+
     const routeChange = () =>{
         let path = `/`;
         hist.push(path);
+        const resetBoard =  [{squares: Array(9).fill(null)}];
+
         window. location. reload();
         window. localStorage.clear();
+        localStorage.setItem("history", JSON.stringify(resetBoard))
     }
 
     return (
         <div className="game">
+
             <div className="board-game">
                 {/*current squares takes it from history and history take it from state*/}
                 <Board onClick={(i) => handleClick(i)} squares={current.squares}> </Board>
             </div>
+
             <div className="info-game">
-                <div className="status"> {gameStatus}</div>
+                <div className="game-status"> {gameStatus}</div>
                 <ul>{listOfMoves}</ul>
             </div>
-            <button color="primary" className="button"
-                    onClick={routeChange}
-            >
-                Start new game (login page)
+
+            <button color="primary" className="button-login" onClick={routeChange}>
+                START NEW GAME!
             </button>
         </div>
     )
