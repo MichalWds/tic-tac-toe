@@ -16,10 +16,10 @@ function validate(nameOne, nameTwo) {
         errors.push('Names are the same. Change one to continue');
     }
 
-    if (errors.length == 0) {
-        alert('POPRAWNE DANE');
-        return errors;
-    }
+    // if (errors.length == 0) {
+    //     alert('POPRAWNE DANE');
+    //     return errors;
+    // }
     return errors;
 }
 
