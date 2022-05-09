@@ -1,8 +1,23 @@
 import React, {useReducer} from 'react';
 import Board from "./Board";
 import {Redirect, useHistory} from "react-router-dom";
+import win from '../resources/win.wav'
+import click from '../resources/click.wav'
+import draw from '../resources/draw.wav'
+import back from '../resources/backStep.wav'
 
 export default function Game({authorized}) {
+
+    const clickP = new Audio(click)
+    const backP = new Audio(back)
+
+    const clickPlay = () => {
+        clickP.play()
+    }
+
+    const clickBack = () => {
+        backP.play()
+    }
 
     const reducer = (state, action) => {
         switch (action.type) {
@@ -34,10 +49,12 @@ export default function Game({authorized}) {
     localStorage.setItem("history", JSON.stringify(history))
 
     const goTo = (step) => {
+        clickBack();
         dispatch({type: 'GOTO', payload: {step}});
     }
 
     const handleClick = (squareIndex) => {
+        clickPlay();
         //last item in history
         const current = history[history.length - 1];
 
@@ -84,13 +101,13 @@ export default function Game({authorized}) {
     }
 
     const routeChange = () =>{
-        let path = `/`;
-        hist.push(path);
+        hist.push("/");
         const resetBoard =  [{squares: Array(9).fill(null)}];
 
         window. location. reload();
         window. localStorage.clear();
         localStorage.setItem("history", JSON.stringify(resetBoard))
+        localStorage.setItem("turn", JSON.stringify(true))
     }
 
     return (
@@ -114,6 +131,16 @@ export default function Game({authorized}) {
 }
 
 const calculateWinner = (squares) => {
+    const drawP = new Audio(draw)
+    const winP = new Audio(win)
+
+    const clickDraw = () => {
+        drawP.play()
+    }
+    const clickWin = () => {
+        winP.play()
+    }
+
     const winLines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -128,12 +155,16 @@ const calculateWinner = (squares) => {
     for (let i = 0; i < winLines.length; i++) {
         const [a, b, c] = winLines[i];
         if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
+            clickWin();
             return squares[a];
         }
         if (!squares[a] || !squares[b] || !squares[c]) {
             isDraw = false;
         }
     }
-    if (isDraw) return 'Draw';
+    if (isDraw) {
+        clickDraw();
+        return 'Draw';
+    }
     return null;
 }

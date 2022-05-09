@@ -23,7 +23,7 @@ function validate(nameOne, nameTwo) {
     return errors;
 }
 
-export const Forms2 = () => {
+export const Forms = () => {
     const [nameOne, setNameOne] = useState('');
     const [nameTwo, setNameTwo] = useState('');
     const [errors, setErrors] = useState([]);
@@ -35,14 +35,12 @@ export const Forms2 = () => {
         setNameOne('');
         setNameTwo('');
         setErrors([]);
-
     };
 
     const handleSubmit = (e) => {
         e?.preventDefault();
 
         let isError = false;
-
         const errors = validate(nameOne, nameTwo);
 
         if (errors.length > 0) {
@@ -62,7 +60,7 @@ export const Forms2 = () => {
     return (
         <form onSubmit={handleSubmit}>
             {errors.map((error) => (
-                <p key={error}>Error: {error}</p>
+                <p className="error" key={error}>Error: {error}</p>
             ))}
 
             <label className="login-form">First Player</label>
@@ -95,4 +93,4 @@ export const Forms2 = () => {
     );
 };
 
-export default Forms2;
+export default Forms;

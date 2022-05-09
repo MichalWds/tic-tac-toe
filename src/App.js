@@ -1,6 +1,6 @@
 import './App.css';
 import Game from "./components/Game";
-import Forms2 from "./components/Forms2";
+import Forms from "./components/Forms";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path="/game" component={() => <Game authorized={true}/>}/>
-                <Route exact path="/" component={() => <Forms2/>}/>
+                <Route exact path="/" component={() => <Forms/>}/>
             </Switch>
         </Router>
     );

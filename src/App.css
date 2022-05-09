@@ -6,7 +6,7 @@ body{
     display: flex;
     align-items:center;
     justify-content: center;
-    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("resources/backgr.png");
+    background-image: linear-gradient(rgba(255, 255, 255, 0.53), rgba(13, 14, 13, 0)), url("resources/backgr.png");
 }
 
 /*BUTTON*/
@@ -105,6 +105,7 @@ body{
     font-size: 35px;
     font-family: cursive;
     text-shadow: 0 0 5px #7131ff;
+    font-weight: bold;
 }
 
 /*BUTTON LIST*/
@@ -118,7 +119,7 @@ body{
 }
 
 .button-list:hover {
-    background: #fef9ff80;
+    background: rgba(23, 191, 89, 0.82);
     cursor: pointer;
 }
 /*BUTTON LIST ENDS*/
@@ -149,4 +150,12 @@ input {
     font-size: 30px;
     background-color: #e89aa4;
     font-family: Optima, sans-serif;
+}
+
+.error{
+    color: #e33737;
+    font-size: 25px;
+    font-family: Optima, sans-serif;
+    text-shadow: 0 0 5px #5822d0;
+    font-weight: bold;
 }
