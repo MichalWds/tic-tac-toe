@@ -54,6 +54,7 @@ export default function Game({authorized}) {
     }
 
     const handleClick = (squareIndex) => {
+
         clickPlay();
         //last item in history
         const current = history[history.length - 1];

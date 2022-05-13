@@ -1,0 +1,147 @@
+// Color variables (appears count calculates by raw css)
+@color0: #17bfa0; // Appears 3 times
+@color1: #666666; // Appears 2 times
+@color2: #7320c7; // Appears 2 times
+@color3: #7131ff; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width0: 100px; // Appears 2 times
+@width1: 100%; // Appears 4 times
+
+// Height variables (appears count calculates by raw css)
+@height1: 100px; // Appears 2 times
+@height2: 100%; // Appears 2 times
+
+* {
+  box-sizing: border-box;
+}
+body {
+  align-items:center;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.53), rgba(13, 14, 13, 0)), url("resources/backgr.png");
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: @width1;
+}
+.button {
+  background-color: darkcyan;
+  border-radius: 7px;
+  box-shadow: 0px 5px 15px cornflowerblue;
+  cursor: pointer;
+  flex: 33% 1;
+  font-family: Optima, sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  height: @height1;
+  height: @height2;
+  margin: 10px;
+  padding: 10px;
+  place-items: center;
+  position: relative;
+  top: 0;
+  width: @width0;
+  &:active {
+    background-color: @color0;
+  }
+  &:hover {
+    background-color: #1aab52;
+  }
+}
+.button-login {
+  background-color: darkcyan;
+  border-radius: 7px;
+  box-shadow: 0px 5px 15px cornflowerblue;
+  color: yellow;
+  cursor: pointer;
+  flex: 33% 1;
+  font-family: Optima, sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  height: @height1;
+  height: @height2;
+  margin: 10px;
+  padding: 10px;
+  place-items: center;
+  position: relative;
+  top: 0;
+  width: @width0;
+  &:active {
+    background-color: @color0;
+  }
+  &:hover {
+    background-color: #1a4dab;
+  }
+}
+.game {
+  display: flex;
+  flex-wrap: wrap;
+}
+.info-game {
+  color: @color0;
+  font-size: 20px;
+  margin-left: 400px;
+}
+.board>div {
+  display: flex;
+}
+.button-form {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 0 10px @color1;
+  font-family: Optima, sans-serif;
+  font-size: 24px;
+  padding: 12px 20px;
+  &:hover {
+    background: rgba(23, 191, 89, 0.82);
+    cursor: pointer;
+  }
+}
+.game-status {
+  color: @color2;
+  font-family: cursive;
+  font-size: 35px;
+  font-weight: bold;
+  text-shadow: 0 0 5px @color3;
+}
+.button-list {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 10px @color1;
+  font-family: Optima, sans-serif;
+  font-size: 14px;
+  padding: 6px 20px;
+  &:hover {
+    background: rgba(23, 191, 89, 0.82);
+    cursor: pointer;
+  }
+}
+.login-form {
+  color: @color2;
+  font-family: cursive;
+  font-size: 50px;
+  text-shadow: 0 0 5px @color3;
+}
+input {
+  font-family: Optima, sans-serif;
+  font-size: 30px;
+  width: @width1;
+}
+.input-form-o {
+  background-color: #b1dfe3;
+  font-family: Optima, sans-serif;
+  font-size: 30px;
+  width: @width1;
+}
+.input-form-x {
+  background-color: #e89aa4;
+  font-family: Optima, sans-serif;
+  font-size: 30px;
+  width: @width1;
+}
+.error {
+  color: #e33737;
+  font-family: Optima, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  text-shadow: 0 0 5px #5822d0;
+}
