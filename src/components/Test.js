@@ -26,12 +26,11 @@ export default function Test() {
     }
 
     return <div>
-        DUPA
-        <ul>  //{player.id}
-            <h1>{player.map(player => <li key={player.data} > {player.data.playerTwo}   {player.data.playerOne} </li>
-            )
-            }
-            </h1>
+        <h1>Wyniki</h1>
+        <ul>
+            <h2>{player.map(player => <li key={player.data} >
+                {player.data.player} : {player.data.score} </li>)}
+            </h2>
         </ul>
 
 
