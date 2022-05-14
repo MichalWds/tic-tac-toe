@@ -15,11 +15,6 @@ function validate(nameOne, nameTwo) {
     if (nameTwo == nameOne) {
         errors.push('Names are the same. Change one to continue');
     }
-
-    // if (errors.length == 0) {
-    //     alert('POPRAWNE DANE');
-    //     return errors;
-    // }
     return errors;
 }
 
