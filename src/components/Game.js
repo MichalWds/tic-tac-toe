@@ -4,8 +4,12 @@ import {Redirect, useHistory} from "react-router-dom";
 import click from '../resources/click.wav'
 import back from '../resources/backStep.wav'
 import {calculateWinner} from './calculateWinner'
+import {collection} from "firebase/firestore";
+import {db} from "../lib/init-firebase";
+
 
 export default function Game({authorized}) {
+
 
     const clickP = new Audio(click)
     const backP = new Audio(back)
@@ -57,7 +61,6 @@ export default function Game({authorized}) {
         clickPlay();
         //last item in history
         const current = history[history.length - 1];
-
         //copy of squares in variable Squares  // slice create new string
         const squares = current.squares.slice();
 
@@ -100,6 +103,12 @@ export default function Game({authorized}) {
         return <Redirect to="/"/>
     }
 
+
+
+
+
+
+
     const routeChange = () =>{
         hist.push("/");
         const resetBoard =  [{squares: Array(9).fill(null)}];
@@ -129,42 +138,3 @@ export default function Game({authorized}) {
         </div>
     )
 }
-
-// const calculateWinner = (squares) => {
-//     const drawP = new Audio(draw)
-//     const winP = new Audio(win)
-//
-//     const clickDraw = () => {
-//         drawP.play()
-//     }
-//     const clickWin = () => {
-//         winP.play()
-//     }
-//
-//     const winLines = [
-//         [0, 1, 2],
-//         [3, 4, 5],
-//         [6, 7, 8],
-//         [0, 3, 6],
-//         [1, 4, 7],
-//         [2, 5, 8],
-//         [0, 4, 8],
-//         [2, 4, 6]
-//     ];
-//     let isDraw = true;
-//     for (let i = 0; i < winLines.length; i++) {
-//         const [a, b, c] = winLines[i];
-//         if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
-//             clickWin();
-//             return squares[a];
-//         }
-//         if (!squares[a] || !squares[b] || !squares[c]) {
-//             isDraw = false;
-//         }
-//     }
-//     if (isDraw) {
-//         clickDraw();
-//         return 'Draw';
-//     }
-//     return null;
-// }
