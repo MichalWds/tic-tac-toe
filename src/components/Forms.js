@@ -73,6 +73,7 @@ export const Forms = () => {
                 onChange={(event) => setNameOne(event.target.value)}
                 placeholder="Player ❌"
                 className="input-form-x"
+                maxLength={10}
             />
             <br/>
             <br/>
@@ -84,6 +85,7 @@ export const Forms = () => {
                 onChange={(event) => setNameTwo(event.target.value)}
                 placeholder="Player 🔵"
                 className="input-form-o"
+                maxLength={10}
             />
             <label className="login-form">Type size of board</label>
             <input type="text"
