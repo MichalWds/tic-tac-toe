@@ -104,8 +104,8 @@ export default function Game({authorized}) {
         hist.push("/");
         const resetBoard =  [{squares: Array(9).fill(null)}];
 
-        window. location. reload();
-        window. localStorage.clear();
+        window.location.reload();
+        window.localStorage.clear();
         localStorage.setItem("history", JSON.stringify(resetBoard))
         localStorage.setItem("turn", JSON.stringify(true))
     }

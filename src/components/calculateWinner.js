@@ -1,4 +1,3 @@
-import React from 'react';
 import draw from "../resources/draw.wav";
 import win from "../resources/win.wav";
 

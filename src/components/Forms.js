@@ -1,20 +1,25 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
-function validate(nameOne, nameTwo) {
+function validate(nameOne, nameTwo, size) {
     const errors = [];
 
     if (nameOne.length < 5) {
-        errors.push('Name of first player should be at least 5 characters long');
+        errors.push('Name of first player should be at least 5 characters long.');
     }
 
     if (nameTwo.length < 5) {
-        errors.push('Name of second player should be at least 5 characters long');
+        errors.push('Name of second player should be at least 5 characters long.');
     }
 
-    if (nameTwo == nameOne) {
-        errors.push('Names are the same. Change one to continue');
+    if (nameTwo === nameOne) {
+        errors.push('Names are the same. Change one to continue.');
     }
+
+    if ( size !=9 ) {
+        errors.push('Size has to be equal 9.');
+    }
+
     return errors;
 }
 
@@ -22,6 +27,7 @@ export const Forms = () => {
     const [nameOne, setNameOne] = useState('');
     const [nameTwo, setNameTwo] = useState('');
     const [errors, setErrors] = useState([]);
+    const [size, setSize] = useState('');
 
     let history = useHistory();
 
@@ -29,6 +35,7 @@ export const Forms = () => {
         e.preventDefault();
         setNameOne('');
         setNameTwo('');
+        setSize('');
         setErrors([]);
     };
 
@@ -36,7 +43,7 @@ export const Forms = () => {
         e?.preventDefault();
 
         let isError = false;
-        const errors = validate(nameOne, nameTwo);
+        const errors = validate(nameOne, nameTwo, size);
 
         if (errors.length > 0) {
             setErrors(errors);
@@ -77,6 +84,13 @@ export const Forms = () => {
                 onChange={(event) => setNameTwo(event.target.value)}
                 placeholder="Player 🔵"
                 className="input-form-o"
+            />
+            <label className="login-form">Type size of board</label>
+            <input type="text"
+                   value={size}
+                   onChange={(event) => setSize(event.target.value)}
+                   placeholder="Size"
+                   className="input-form-o"
             />
             <br/>
             <br/>
