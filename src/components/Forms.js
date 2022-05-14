@@ -18,7 +18,7 @@ function validate(playerOne, playerTwo, size) {
         errors.push('Names are the same. Change one to continue.');
     }
 
-    if ( size !=9 ) {
+    if (size != 9) {
         errors.push('Size has to be equal 9.');
     }
 
@@ -48,18 +48,23 @@ export const Forms = () => {
         let isError = false;
         const errors = validate(playerOne, playerTwo, size);
 
-        addDoc(statsRef, {player: playerOne}).then(response => {
+        addDoc(statsRef, {
+            "player": playerOne,
+            "score": 0
+        }).then(response => {
             console.log(response)
         }).catch(error => {
             console.log(error.message)
         });
 
-        addDoc(statsRef, {player: playerTwo}).then(response => {
+        addDoc(statsRef, {
+            "player": playerTwo,
+            "score": 0
+        }).then(response => {
             console.log(response)
         }).catch(error => {
             console.log(error.message)
         });
-
 
 
         if (errors.length > 0) {
@@ -98,11 +103,11 @@ export const Forms = () => {
             <label className="login-form">Second Player</label>
             <br/>
             <input type="text"
-                value={playerTwo}
-                onChange={(event) => setPlayerTwo(event.target.value)}
-                placeholder="Player 🔵"
-                className="input-form-o"
-                maxLength={10}
+                   value={playerTwo}
+                   onChange={(event) => setPlayerTwo(event.target.value)}
+                   placeholder="Player 🔵"
+                   className="input-form-o"
+                   maxLength={10}
             />
             <label className="login-form">Type size of board</label>
             <input type="text"
