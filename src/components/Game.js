@@ -4,8 +4,12 @@ import {Redirect, useHistory} from "react-router-dom";
 import click from '../resources/click.wav'
 import back from '../resources/backStep.wav'
 import {calculateWinner} from './calculateWinner'
+import {collection} from "firebase/firestore";
+import {db} from "../lib/init-firebase";
+
 
 export default function Game({authorized}) {
+
 
     const clickP = new Audio(click)
     const backP = new Audio(back)
@@ -98,6 +102,12 @@ export default function Game({authorized}) {
     if (!authorized) {
         return <Redirect to="/"/>
     }
+
+
+
+
+
+
 
     const routeChange = () =>{
         hist.push("/");

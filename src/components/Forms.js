@@ -1,18 +1,20 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import {addDoc} from "firebase/firestore";
+import {statsRef} from "../lib/firestore.collectons";
 
-function validate(nameOne, nameTwo, size) {
+function validate(playerOne, playerTwo, size) {
     const errors = [];
 
-    if (nameOne.length < 5) {
+    if (playerOne.length < 5) {
         errors.push('Name of first player should be at least 5 characters long.');
     }
 
-    if (nameTwo.length < 5) {
+    if (playerTwo.length < 5) {
         errors.push('Name of second player should be at least 5 characters long.');
     }
 
-    if (nameTwo === nameOne) {
+    if (playerTwo === playerOne) {
         errors.push('Names are the same. Change one to continue.');
     }
 
@@ -24,8 +26,8 @@ function validate(nameOne, nameTwo, size) {
 }
 
 export const Forms = () => {
-    const [nameOne, setNameOne] = useState('');
-    const [nameTwo, setNameTwo] = useState('');
+    const [playerOne, setPlayerOne] = useState('');
+    const [playerTwo, setPlayerTwo] = useState('');
     const [errors, setErrors] = useState([]);
     const [size, setSize] = useState('');
 
@@ -33,8 +35,8 @@ export const Forms = () => {
 
     const resetData = (e) => {
         e.preventDefault();
-        setNameOne('');
-        setNameTwo('');
+        setPlayerOne('');
+        setPlayerTwo('');
         setSize('');
         setErrors([]);
     };
@@ -43,7 +45,20 @@ export const Forms = () => {
         e?.preventDefault();
 
         let isError = false;
-        const errors = validate(nameOne, nameTwo, size);
+        const errors = validate(playerOne, playerTwo, size);
+
+        addDoc(statsRef, {playerOne}).then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error.message)
+        });
+
+        addDoc(statsRef, {playerTwo}).then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error.message)
+        });
+
 
         if (errors.length > 0) {
             setErrors(errors);
@@ -51,8 +66,8 @@ export const Forms = () => {
         }
         if (!isError) {
 
-            localStorage.setItem("playerOne", nameOne)
-            localStorage.setItem("playerTwo", nameTwo)
+            localStorage.setItem("playerOne", playerOne)
+            localStorage.setItem("playerTwo", playerTwo)
 
             history.push('/game');
             window.location.reload()
@@ -69,8 +84,8 @@ export const Forms = () => {
             <br/>
             <input
                 type="text"
-                value={nameOne}
-                onChange={(event) => setNameOne(event.target.value)}
+                value={playerOne}
+                onChange={(event) => setPlayerOne(event.target.value)}
                 placeholder="Player ❌"
                 className="input-form-x"
                 maxLength={10}
@@ -81,8 +96,8 @@ export const Forms = () => {
             <label className="login-form">Second Player</label>
             <br/>
             <input type="text"
-                value={nameTwo}
-                onChange={(event) => setNameTwo(event.target.value)}
+                value={playerTwo}
+                onChange={(event) => setPlayerTwo(event.target.value)}
                 placeholder="Player 🔵"
                 className="input-form-o"
                 maxLength={10}
