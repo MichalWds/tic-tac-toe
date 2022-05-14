@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {addDoc} from "firebase/firestore";
+import {addDoc, getDocs, setDoc} from "firebase/firestore";
 import {statsRef} from "../lib/firestore.collectons";
 
 function validate(playerOne, playerTwo, size) {
@@ -30,6 +30,7 @@ export const Forms = () => {
     const [playerTwo, setPlayerTwo] = useState('');
     const [errors, setErrors] = useState([]);
     const [size, setSize] = useState('');
+    const [score, setScore] = useState(0)
 
     let history = useHistory();
 
@@ -47,17 +48,18 @@ export const Forms = () => {
         let isError = false;
         const errors = validate(playerOne, playerTwo, size);
 
-        addDoc(statsRef, {playerOne}).then(response => {
+        addDoc(statsRef, {player: playerOne}).then(response => {
             console.log(response)
         }).catch(error => {
             console.log(error.message)
         });
 
-        addDoc(statsRef, {playerTwo}).then(response => {
+        addDoc(statsRef, {player: playerTwo}).then(response => {
             console.log(response)
         }).catch(error => {
             console.log(error.message)
         });
+
 
 
         if (errors.length > 0) {
