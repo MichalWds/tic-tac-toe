@@ -6,7 +6,13 @@ import Test from "./components/Test";
 
 function App() {
     return (
-        <Test/>
+        <Router>
+            <Switch>
+                <Route exact path="/game" component={() => <Game authorized={true}/>}/>
+                <Route exact path="/" component={() => <Forms/>}/>
+            </Switch>
+        </Router>
+
 
     );
 }

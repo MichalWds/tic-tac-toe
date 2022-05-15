@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {addDoc, getDocs, setDoc} from "firebase/firestore";
+import {addDoc, doc, collection, getDocs, setDoc, updateDoc} from "firebase/firestore";
 import {statsRef} from "../lib/firestore.collectons";
+import {db} from "../lib/init-firebase";
 
 function validate(playerOne, playerTwo, size) {
     const errors = [];
@@ -30,7 +31,10 @@ export const Forms = () => {
     const [playerTwo, setPlayerTwo] = useState('');
     const [errors, setErrors] = useState([]);
     const [size, setSize] = useState('');
-    const [score, setScore] = useState(0)
+    const [scoreOne, setScoreOne] = useState(0)
+    const [idOne, setIdOne] = useState('')
+    const [scoreTwo, setScoreTwo] = useState(0)
+    const [idTwo, setIdTwo] = useState('')
 
     let history = useHistory();
 
@@ -50,22 +54,33 @@ export const Forms = () => {
 
         addDoc(statsRef, {
             "player": playerOne,
-            "score": 0
+            "score": scoreOne
         }).then(response => {
             console.log(response)
+            setIdOne(response.id)
+            setScoreOne(scoreOne)
+
+            localStorage.setItem("idOne", idOne)
+            localStorage.setItem("scoreOne", scoreOne )
+
         }).catch(error => {
             console.log(error.message)
         });
 
         addDoc(statsRef, {
             "player": playerTwo,
-            "score": 0
+            "score": scoreTwo
         }).then(response => {
             console.log(response)
+            setIdTwo(response.id)
+            setScoreTwo(scoreTwo)
+
+            localStorage.setItem("idTwo", idTwo)
+            localStorage.setItem("scoreTwo", scoreTwo )
+
         }).catch(error => {
             console.log(error.message)
         });
-
 
         if (errors.length > 0) {
             setErrors(errors);
@@ -75,7 +90,6 @@ export const Forms = () => {
 
             localStorage.setItem("playerOne", playerOne)
             localStorage.setItem("playerTwo", playerTwo)
-
             history.push('/game');
             window.location.reload()
         }

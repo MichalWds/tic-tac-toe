@@ -1,5 +1,7 @@
 import draw from "../resources/draw.wav";
 import win from "../resources/win.wav";
+import {addDoc, doc, collection, getDocs, setDoc, updateDoc} from "firebase/firestore";
+import {db} from "../lib/init-firebase";
 
 export const calculateWinner = (squares) => {
     const drawP = new Audio(draw)

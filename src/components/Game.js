@@ -4,12 +4,10 @@ import {Redirect, useHistory} from "react-router-dom";
 import click from '../resources/click.wav'
 import back from '../resources/backStep.wav'
 import {calculateWinner} from './calculateWinner'
-import {collection} from "firebase/firestore";
+import {doc, updateDoc} from "firebase/firestore";
 import {db} from "../lib/init-firebase";
 
-
 export default function Game({authorized}) {
-
 
     const clickP = new Audio(click)
     const backP = new Audio(back)
@@ -84,6 +82,48 @@ export default function Game({authorized}) {
     //navigate to login page
     const hist = useHistory();
 
+    if(winner==='❌'){
+        console.log(localStorage.getItem("idOne"))
+        console.log(localStorage.getItem("idTwo"))
+
+        const id =localStorage.getItem("idOne");
+        let score =JSON.parse(localStorage.getItem('scoreOne'))
+        if(!id){
+            return
+        }
+        const docRef = doc(db, 'stats', id )
+
+        // score = score+1;
+        console.log("score", score)
+
+        localStorage.setItem("scoreOne", score+1);
+
+        updateDoc(docRef, {
+            "score": score
+        }).then(response => {
+            console.log(response)
+        }).catch(error => error.message);
+    }
+
+    if(winner==='🔵'){
+
+        const id =localStorage.getItem("idTwo");
+        let score =JSON.parse(localStorage.getItem('scoreTwo'))
+        if(!id){
+            return
+        }
+        const docRef = doc(db, 'stats', id )
+
+        localStorage.setItem("scoreTwo", score+1);
+
+        updateDoc(docRef, {
+            "score": score
+        }).then(response => {
+            console.log(response)
+        }).catch(error => error.message);
+    }
+
+
     const gameStatus = winner
         ? winner === 'Draw'
             ? "It's a DRAW!"
@@ -102,12 +142,6 @@ export default function Game({authorized}) {
     if (!authorized) {
         return <Redirect to="/"/>
     }
-
-
-
-
-
-
 
     const routeChange = () =>{
         hist.push("/");
