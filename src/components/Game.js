@@ -94,9 +94,9 @@ export default function Game({authorized}) {
         const docRef = doc(db, 'stats', id )
 
         // score = score+1;
-        console.log("score", score)
 
         localStorage.setItem("scoreOne", score+1);
+        console.log("score", score)
 
         updateDoc(docRef, {
             "score": score

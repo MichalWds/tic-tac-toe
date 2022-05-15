@@ -48,6 +48,8 @@ export const Forms = () => {
 
     const handleSubmit = (e) => {
         e?.preventDefault();
+        const resetBoard =  [{squares: Array(9).fill(null)}];
+        localStorage.setItem("history", JSON.stringify(resetBoard))
 
         let isError = false;
         const errors = validate(playerOne, playerTwo, size);
