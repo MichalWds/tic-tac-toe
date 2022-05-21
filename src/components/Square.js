@@ -15,7 +15,7 @@ export default function Square(props) {
             props.onClick();
         } else {
             clickAlert();
-            swal("This place is taken.")
+            swal("This place is taken.");
         }
     }
     return (

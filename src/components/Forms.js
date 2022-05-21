@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
-import {addDoc, getDocs, setDoc} from "firebase/firestore";
+import {addDoc} from "firebase/firestore";
 import {statsRef} from "../lib/firestore.collectons";
 
 function validate(playerOne, playerTwo, size) {
@@ -30,7 +30,8 @@ export const Forms = () => {
     const [playerTwo, setPlayerTwo] = useState('');
     const [errors, setErrors] = useState([]);
     const [size, setSize] = useState('');
-    const [score, setScore] = useState(0)
+    const [scoreOne, setScoreOne] = useState(0)
+    const [scoreTwo, setScoreTwo] = useState(0)
 
     let history = useHistory();
 
@@ -42,40 +43,57 @@ export const Forms = () => {
         setErrors([]);
     };
 
-    const handleSubmit = (e) => {
+    const addData = () => {
+        return new Promise((res) => {
+
+            addDoc(statsRef, {
+                "player": playerOne,
+                "score": scoreOne
+            }).then(response => {
+                console.log(response)
+                localStorage.setItem("idOne", response.id)
+
+                setScoreOne(scoreOne);
+                localStorage.setItem("scoreOne", scoreOne)
+
+                addDoc(statsRef, {
+                    "player": playerTwo,
+                    "score": scoreTwo
+                }).then(async response => {
+                    localStorage.setItem("idTwo", response.id)
+
+                    setScoreTwo(scoreTwo)
+                    localStorage.setItem("scoreTwo", scoreTwo)
+                    res();
+
+                }).catch(error => {
+                    console.log(error.message)
+                });
+            }).catch(error => {
+                console.log(error.message)
+            });
+        })
+    }
+
+    const handleSubmit = async (e) => {
         e?.preventDefault();
+        const resetBoard = [{squares: Array(9).fill(null)}];
+        localStorage.setItem("history", JSON.stringify(resetBoard))
 
         let isError = false;
         const errors = validate(playerOne, playerTwo, size);
 
-        addDoc(statsRef, {
-            "player": playerOne,
-            "score": 0
-        }).then(response => {
-            console.log(response)
-        }).catch(error => {
-            console.log(error.message)
-        });
-
-        addDoc(statsRef, {
-            "player": playerTwo,
-            "score": 0
-        }).then(response => {
-            console.log(response)
-        }).catch(error => {
-            console.log(error.message)
-        });
-
+        await addData();
 
         if (errors.length > 0) {
             setErrors(errors);
             isError = true;
         }
         if (!isError) {
-
             localStorage.setItem("playerOne", playerOne)
             localStorage.setItem("playerTwo", playerTwo)
-
+            localStorage.setItem("scoreOne", scoreOne)
+            localStorage.setItem("scoreTwo", scoreTwo)
             history.push('/game');
             window.location.reload()
         }

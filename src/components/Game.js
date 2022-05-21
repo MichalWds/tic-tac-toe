@@ -4,12 +4,10 @@ import {Redirect, useHistory} from "react-router-dom";
 import click from '../resources/click.wav'
 import back from '../resources/backStep.wav'
 import {calculateWinner} from './calculateWinner'
-import {collection} from "firebase/firestore";
+import {doc, updateDoc} from "firebase/firestore";
 import {db} from "../lib/init-firebase";
 
-
 export default function Game({authorized}) {
-
 
     const clickP = new Audio(click)
     const backP = new Audio(back)
@@ -45,7 +43,6 @@ export default function Game({authorized}) {
         xIsNext: JSON.parse(localStorage.getItem('turn')),
         history: JSON.parse(localStorage.getItem('history'))
     });
-    // history: [{squares: Array(9).fill(null)}]
 
     const {xIsNext, history} = state;
     localStorage.setItem("turn", JSON.stringify(xIsNext))
@@ -84,12 +81,50 @@ export default function Game({authorized}) {
     //navigate to login page
     const hist = useHistory();
 
+    if(winner==='❌'){
+        console.log(localStorage.getItem("idOne"))
+        console.log(localStorage.getItem("idTwo"))
+
+        const id =localStorage.getItem("idOne");
+        let score =JSON.parse(localStorage.getItem('scoreOne'))
+        if(!id){
+            return
+        }
+        const docRef = doc(db, 'stats', id )
+
+        localStorage.setItem("scoreOne", score+1);
+
+        updateDoc(docRef, {
+            "score": score+1
+        }).then(response => {
+            console.log(response)
+        }).catch(error => error.message);
+    }
+
+    if(winner==='🔵'){
+
+        const id =localStorage.getItem("idTwo");
+        let score =JSON.parse(localStorage.getItem('scoreTwo'))
+        if(!id){
+            return
+        }
+        const docRef = doc(db, 'stats', id )
+
+        localStorage.setItem("scoreTwo", score+1);
+
+        updateDoc(docRef, {
+            "score": score+1
+        }).then(response => {
+            console.log(response)
+        }).catch(error => error.message);
+    }
+
     const gameStatus = winner
         ? winner === 'Draw'
             ? "It's a DRAW!"
             : "Winner is  " + winner
-        : "Next move belongs to player " + (turn ? localStorage.getItem("playerOne") + ":  ❌" : localStorage.getItem("playerTwo") + ":  🔵")
-    //step = element inside history , move = index of this array
+        : "Next move  " + (turn ? localStorage.getItem("playerOne") + ":  ❌" : localStorage.getItem("playerTwo") + ":  🔵")
+
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the same Game";  //go to step number or start the game
         return <li key={move}  >
@@ -103,12 +138,6 @@ export default function Game({authorized}) {
         return <Redirect to="/"/>
     }
 
-
-
-
-
-
-
     const routeChange = () =>{
         hist.push("/");
         const resetBoard =  [{squares: Array(9).fill(null)}];
@@ -119,11 +148,15 @@ export default function Game({authorized}) {
         localStorage.setItem("turn", JSON.stringify(true))
     }
 
+    const routeStats = () =>{
+        hist.push("/stats");
+        window.location.reload();
+    }
+
     return (
         <div className="game">
 
             <div className="board-game">
-                {/*current squares takes it from history and history take it from state*/}
                 <Board onClick={(i) => handleClick(i)} squares={current.squares}> </Board>
             </div>
 
@@ -134,6 +167,9 @@ export default function Game({authorized}) {
 
             <button color="primary" className="button-login" onClick={routeChange}>
                 START NEW GAME!
+            </button>
+            <button color="primary" className="button-stats" onClick={routeStats}>
+                STATS
             </button>
         </div>
     )
