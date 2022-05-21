@@ -92,6 +92,8 @@ export const Forms = () => {
         if (!isError) {
             localStorage.setItem("playerOne", playerOne)
             localStorage.setItem("playerTwo", playerTwo)
+            localStorage.setItem("scoreOne", scoreOne)
+            localStorage.setItem("scoreTwo", scoreTwo)
             history.push('/game');
             window.location.reload()
         }

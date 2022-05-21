@@ -95,7 +95,7 @@ export default function Game({authorized}) {
         localStorage.setItem("scoreOne", score+1);
 
         updateDoc(docRef, {
-            "score": score
+            "score": score+1
         }).then(response => {
             console.log(response)
         }).catch(error => error.message);
@@ -113,7 +113,7 @@ export default function Game({authorized}) {
         localStorage.setItem("scoreTwo", score+1);
 
         updateDoc(docRef, {
-            "score": score
+            "score": score+1
         }).then(response => {
             console.log(response)
         }).catch(error => error.message);
