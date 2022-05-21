@@ -32,7 +32,7 @@ export default function Test() {
         window.location.reload();
     }
     return <div className="game">
-        <h1>Win statistics</h1>
+        <div className="stats"><h1>WIN STATISTICS</h1></div>
         <ul>
             <h2>{player.map(player => <li key={player.data}>
                 {player.data.player} : {player.data.score} </li>)}

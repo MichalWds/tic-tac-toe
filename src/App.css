@@ -185,3 +185,15 @@ input {
 .button-stats:hover {
     background-color: #7320c7;
 }
+
+.stats{
+    color: #7320c7;
+    font-family: Optima, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+    padding-top: 25px;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
