@@ -159,3 +159,29 @@ input {
     text-shadow: 0 0 5px #5822d0;
     font-weight: bold;
 }
+
+.button-stats {
+    flex: 10% 1;
+    cursor: pointer;
+    place-items: center;
+    font-size: 50px;
+    color: yellow;
+    background-color: darkcyan;
+    font-weight: bold;
+    font-family: Optima, sans-serif;
+    box-shadow: 0px 5px 15px cornflowerblue;
+    border-radius: 7px;
+    margin: 10px;
+    padding: 10px;
+    width: 10px;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+    top: 0;
+}
+.button-stats:active {
+    background-color: #17bfa0;
+}
+.button-stats:hover {
+    background-color: #7320c7;
+}

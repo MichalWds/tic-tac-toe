@@ -43,7 +43,6 @@ export default function Game({authorized}) {
         xIsNext: JSON.parse(localStorage.getItem('turn')),
         history: JSON.parse(localStorage.getItem('history'))
     });
-    // history: [{squares: Array(9).fill(null)}]
 
     const {xIsNext, history} = state;
     localStorage.setItem("turn", JSON.stringify(xIsNext))
@@ -93,10 +92,7 @@ export default function Game({authorized}) {
         }
         const docRef = doc(db, 'stats', id )
 
-        // score = score+1;
-
         localStorage.setItem("scoreOne", score+1);
-        console.log("score", score)
 
         updateDoc(docRef, {
             "score": score
@@ -123,13 +119,12 @@ export default function Game({authorized}) {
         }).catch(error => error.message);
     }
 
-
     const gameStatus = winner
         ? winner === 'Draw'
             ? "It's a DRAW!"
             : "Winner is  " + winner
-        : "Next move belongs to player " + (turn ? localStorage.getItem("playerOne") + ":  ❌" : localStorage.getItem("playerTwo") + ":  🔵")
-    //step = element inside history , move = index of this array
+        : "Next move  " + (turn ? localStorage.getItem("playerOne") + ":  ❌" : localStorage.getItem("playerTwo") + ":  🔵")
+
     const listOfMoves = history.map((step, move) => {
         const description = move ? 'Go to step: ' + move : "Start the same Game";  //go to step number or start the game
         return <li key={move}  >
@@ -153,11 +148,15 @@ export default function Game({authorized}) {
         localStorage.setItem("turn", JSON.stringify(true))
     }
 
+    const routeStats = () =>{
+        hist.push("/stats");
+        window.location.reload();
+    }
+
     return (
         <div className="game">
 
             <div className="board-game">
-                {/*current squares takes it from history and history take it from state*/}
                 <Board onClick={(i) => handleClick(i)} squares={current.squares}> </Board>
             </div>
 
@@ -168,6 +167,9 @@ export default function Game({authorized}) {
 
             <button color="primary" className="button-login" onClick={routeChange}>
                 START NEW GAME!
+            </button>
+            <button color="primary" className="button-stats" onClick={routeStats}>
+                STATS
             </button>
         </div>
     )
